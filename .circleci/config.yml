@@ -1,0 +1,47 @@
+version: 2
+jobs:
+  build-x86:
+    machine:
+      image: ubuntu-1604:201903-01
+    steps:
+      - checkout
+      - run: sudo apt-get update
+      - run: sudo apt-get -y install wget
+      - run: sudo apt-get -y install unzip
+      - run: make ARCH="--x86" all
+  build-amd64:
+    machine:
+      image: ubuntu-1604:201903-01
+    steps:
+      - checkout
+      - run: sudo apt-get update
+      - run: sudo apt-get -y install wget
+      - run: sudo apt-get -y install unzip
+      - run: make ARCH="--amd64" all
+  build-arm:
+    machine:
+      image: ubuntu-1604:201903-01
+    steps:
+      - checkout
+      - run: sudo apt-get update
+      - run: sudo apt-get -y install wget
+      - run: sudo apt-get -y install unzip
+      - run: make ARCH="--arm" all
+  build-powerpc:
+    machine:
+      image: ubuntu-1604:201903-01
+    steps:
+      - checkout
+      - run: sudo apt-get update
+      - run: sudo apt-get -y install wget
+      - run: sudo apt-get -y install unzip
+      - run: make ARCH="--powerpc" all
+workflows:
+  version: 2
+  sound_builds:
+    jobs:
+      - build-x86
+      - build-amd64
+      - build-arm
+      - build-powerpc
+
